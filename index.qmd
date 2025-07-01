@@ -1,5 +1,53 @@
 ---
 title: "Median Income"
+author: "Umaira"
+execute: 
+  echo: false
+  message: false
+  warning: false
 ---
+Get Some more data
 
-Get some more data 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+options(tigris_use_cache = TRUE)
+options(tigris_progress = FALSE)
+
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(tidycensus))
+suppressPackageStartupMessages(library(sf))
+
+# Download median household income by census tract for Massachusetts
+ma_income <- get_acs(
+  geography = "tract",
+  variables = "B19013_001",  # Median household income variable
+  state = "MA",
+  year = 2022,  # Most recent ACS 5-year estimates
+  geometry = TRUE  # Set to TRUE if you want spatial data
+)
+```
+
+```{r}
+# Create choropleth map
+ggplot(data = ma_income, aes(fill = estimate)) +
+  geom_sf(color = "white", size = 0.1) +
+  scale_fill_viridis_c(
+    option = "magma", 
+    labels = scales::dollar_format(),
+    name = "Median Income"
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Median Household Income by Census Tract in Massachusetts",
+    caption = "Source: ACS 5-Year Estimates (2022)"
+  ) +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+
+```
