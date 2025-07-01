@@ -150,6 +150,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>The code above retrieves and maps median household income data for Massachusetts census tracts using the tidycensus and sf packages in R. It pulls the latest available data from the 2022 American Community Survey (5-Year Estimates) through the Census API. By setting geometry = TRUE, it also fetches the geographic boundaries for each tract, enabling spatial visualization. The resulting data is then used to create a choropleth map using ggplot2, where each tract is shaded based on its median income. This map helps reveal income variation across different parts of the state and provides insights into geographic patterns of wealth and inequality.</p>
 
 
 
@@ -226,7 +227,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/umaira2022\.github\.io\/class-25-06-30\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
